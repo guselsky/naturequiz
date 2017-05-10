@@ -1,0 +1,26 @@
+.prompt-section {
+	&__prompt-text {
+		text-align: center;
+		margin-top: 15px;
+		font-size: 40px;
+	}
+
+	&__prompt-item {
+		color: purple;
+	}
+}
+
+#container {
+	@include clearfix;
+
+	margin-top: 5px;
+	max-width: 1200px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.square {
+	width: 33%;
+	float: left;
+	padding: 10px;
+}
