@@ -1,0 +1,19 @@
+{
+  "name": "naturequiz",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/guselsky/naturequiz.git"
+  },
+  "author": "David Gusel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/guselsky/naturequiz/issues"
+  },
+  "homepage": "https://github.com/guselsky/naturequiz#readme"
+}
