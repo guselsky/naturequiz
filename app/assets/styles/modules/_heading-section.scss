@@ -1,12 +1,25 @@
 .heading-section {
-	margin: 0 auto 0 auto;
-	padding: 15px 0;
-	text-align: center;
-	background-color: $skyBlue;
+
+		margin: 0 auto 0 auto;
+		padding: 10px 0;
+		text-align: center;
+		background-color: $skyBlue;
+
+	@include bp-babyBear {
+		margin: 0 auto 0 auto;
+		padding: 15px 0;
+		text-align: center;
+	}
 }
 
-
 .main-headline {
-	font-size: 50px;
-	margin: 15px;
+
+	font-size: 30px;
+	margin: 10px;
+
+	@include bp-babyBear {
+		font-size: 50px;
+		margin: 15px;
+	}
+
 }

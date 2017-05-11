@@ -2,6 +2,9 @@
 <html>
 <head>
 	<title>Nature Quiz</title>
+	<meta name="keywords" content="Flowers, Trees, Nature, Quiz, Learning">
+ 	<meta name="description" content="Learn To Name Flowers And Trees">
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<link href="https://fonts.googleapis.com/css?family=Droid+Sans:400,700" rel="stylesheet">
@@ -9,10 +12,9 @@
 <body>
 	<div class="heading-section">
 		<h1 class="main-headline">Nature Quiz</h1>
-		<button class="btn">New Game</button>
-		<span id="message"></span>
-		<button class="btn ">Flowers</button>
-		<button class=" btn">Trees</button>
+		<button id="new-game-button" class="btn">New Game</button>
+		<button id="flowers-button" class="btn">Flowers</button>
+		<button id="trees-button" class=" btn">Trees</button>
 	</div>
 
 	<div class="prompt-section">
@@ -20,13 +22,14 @@
 	</div>
 
 	<div id="container">
-		<div class="flower-tile"><img class="flower-image" id="flower-image-1" src="assets/images/nettle.jpg" alt="flower"></div>
-		<div class="flower-tile"><img class="flower-image" id="flower-image-2" src="assets/images/sunflower.jpg" alt="flower"></div>
-		<div class="flower-tile"><img class="flower-image" id="flower-image-3" src="assets/images/sunflower.jpg" alt="flower"></div>
-		<div class="flower-tile"><img class="flower-image" id="flower-image-4" src="assets/images/sunflower.jpg" alt="flower"></div>
-		<div class="flower-tile"><img class="flower-image" id="flower-image-5" src="assets/images/sunflower.jpg" alt="flower"></div>
-		<div class="flower-tile"><img class="flower-image" id="flower-image-6" src="assets/images/sunflower.jpg" alt="flower"></div>
+		<div class="flower-tile"><img class="flower-image" id="flower-image-1" src="assets/images/flower-icon.png" alt="flower"></div>
+		<div class="flower-tile"><img class="flower-image" id="flower-image-2" src="assets/images/flower-icon.png" alt="flower"></div>
+		<div class="flower-tile"><img class="flower-image" id="flower-image-3" src="assets/images/flower-icon.png" alt="flower"></div>
+		<div class="flower-tile"><img class="flower-image" id="flower-image-4" src="assets/images/flower-icon.png" alt="flower"></div>
+		<div class="flower-tile"><img class="flower-image" id="flower-image-5" src="assets/images/flower-icon.png" alt="flower"></div>
+		<div class="flower-tile"><img class="flower-image" id="flower-image-6" src="assets/images/flower-icon.png" alt="flower"></div>
 	</div>
+	<script type="text/javascript" src="assets/scripts/objects.js"></script>
 	<script type="text/javascript" src="assets/scripts/main.js"></script>
 </body>
 </html>

@@ -1,51 +1,54 @@
-var flowerImages = document.querySelectorAll('.flower-image');
+var objectImages = document.querySelectorAll('.flower-image');
+var tiles = document.querySelectorAll('.flower-tile');
 var promptText = document.querySelector('#prompt-word');
-var flowers = [
-		{
-		name: "Tulip",
-		fileName: "tulip.jpg"
-	},
-	{
-		name: "Daffodil",
-		fileName: "daffodil.jpg"
-	},
-	{
-		name: "Buttercup",
-		fileName: "buttercup.jpg"
-	},
-	{
-		name: "Daisy",
-		fileName: "daisy.jpg"
-	},
-	{
-		name: "Dandelion",
-		fileName: "dandelion.jpg"
-	},
-	{
-		name: "Nettle",
-		fileName: "nettle.jpg"
-	},
-	{
-		name: "Poppy",
-		fileName: "poppy.jpg"
-	},
-	{
-		name: "Sunflower",
-		fileName: "sunflower.jpg"
-	},
-	{
-		name: "White clover",
-		fileName: "white-clover.jpg"
-	},
-	{
-		name: "Thistle",
-		fileName: "thistle.jpg"
-	},
-];
+var flowerButton = document.querySelector('#flowers-button');
+var treeButton = document.querySelector('#trees-button');
+// Create an array to store selected Flowers's names
+var objectNames = [];
+var promptedObject = '';
+var objectImageTag = '';
+var selectedObject = '';
+var selectedMode = "";
 
-// Make an array of unique numbers from 1 to 10
-var randomNumbers = [0,1,2,3,4,5,6,7,8,9];
+init();
 
+function init() {
+	selectFlowerObject();
+	selectTreeObject();
+}
+
+// if Flowers is clicked make the quiz about flowers
+	function selectFlowerObject() {
+		flowerButton.addEventListener('click', function() {
+		selectedMode = 1;
+		reset(flowers);
+	});
+}
+
+// if Trees is clicked, make the quiz about Trees
+function selectTreeObject() {
+	treeButton.addEventListener('click', function() {
+		selectedMode = 2;
+		reset(trees);
+	});
+}
+
+function reset(natureObject) {
+
+	randomNumbers(natureObject.length);
+	shuffle(randomNumbersArray);
+	setUpTheTiles(randomNumbersArray, natureObject);
+}
+
+// Make an array of numbers the size of the object
+function randomNumbers(objectLength) {
+		
+	randomNumbersArray = [];
+
+	for (var i = 0; i < objectLength; i++) {
+		randomNumbersArray.push(i);
+	}
+}
 
 // Create a shuffle function
 function shuffle(array) {
@@ -58,28 +61,73 @@ function shuffle(array) {
 	}
 }
 
-// Shuffle The Array
-shuffle(randomNumbers);
+// Set up the Quiz Tiles
+function setUpTheTiles(randomNumbersArray, natureObject) {
 
-// Create an array to store selected Flowers's names
-var flowerNames = [];
+	// Create an array to store selected Flowers's names
+	objectNames = [];
 
-for (var i = 0; i < flowerImages.length; i++) {
+	for (var i = 0; i < objectImages.length; i++) {
 
-	var flowerFileName = flowers[randomNumbers[i]].fileName;
-	var flowerName = flowers[randomNumbers[i]].name;
+		var objectFileName = natureObject[randomNumbersArray[i]].fileName;
+		var objectName = natureObject[randomNumbersArray[i]].name;
 
-	flowerImages[i].src = "assets/images/" + flowerFileName;
-	flowerNames.push(flowerName);
+		objectImages[i].src = "assets/images/" + objectFileName;
+		objectNames.push(objectName);
+	}
+
+	// Set a random prompted flower
+	var randomNumber = Math.floor(Math.random() * 6);
+	promptedObject = objectNames[randomNumber];
+	objectImageTag = objectImages[randomNumber];
+
+	// Change the prompt
+	promptText.textContent = promptedObject;
 }
 
-// Set a random prompted flower
-var randomNumber = Math.floor(Math.random() * 6);
-var promptedFlower = flowerNames[randomNumber];
 
 
-// Change the prompt
-promptText.textContent = promptedFlower;
+tiles[0].addEventListener('click', function() {
+	selectedObject = 0;
+	queryFunction(selectedObject);		
+});
+tiles[1].addEventListener('click', function() {
+	selectedObject = 1;
+	queryFunction(selectedObject);
+});
+tiles[2].addEventListener('click', function() {
+	selectedObject = 2;
+	queryFunction(selectedObject);
+});
+tiles[3].addEventListener('click', function() {
+	selectedObject = 3;
+	queryFunction(selectedObject);
+});
+tiles[4].addEventListener('click', function() {
+	selectedObject = 4;
+	queryFunction(selectedObject);
+});
+tiles[5].addEventListener('click', function() {
+	selectedObject = 5;
+	queryFunction(selectedObject);
+});
 
-// listen for Clicks
 
+function queryFunction(sel) {
+	if (promptedObject === objectNames[sel]) {
+		alert('correct');
+		if (selectedMode === 1) {
+			reset(flowers);
+		} else if (selectedMode === 2) {
+			reset(trees);
+		}
+	} 
+}
+	
+// Make a correct statement
+
+// Make a counter
+
+// Add another language
+
+// Decentralize code
