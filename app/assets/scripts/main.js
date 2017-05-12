@@ -9,6 +9,9 @@ var objectNames = [];
 var promptedObject = '';
 var selectedObject = '';
 var selectedMode = "";
+var roundCount = 2;
+var numberOfRounds = roundCount;
+var incorrectGuesses = 0;
 
 init();
 
@@ -29,6 +32,7 @@ function init() {
 function selectTreeObject() {
 	treeButton.addEventListener('click', function() {
 		selectedMode = 2;
+
 		reset(trees);
 	});
 }
@@ -63,20 +67,22 @@ function shuffle(array) {
 
 // Set up the Quiz Tiles
 function setUpTheTiles(randomNumbersArray, natureObject) {
+	// display images again after a game is over
+	Array.from(objectImages, e => e.style.display = 'block');
 
 	// Create an array to store selected Flowers's names
 	objectNames = [];
 
+	// Set up the tiles
 	for (var i = 0; i < objectImages.length; i++) {
 
 		var objectFileName = natureObject[randomNumbersArray[i]].fileName;
 		var objectName = natureObject[randomNumbersArray[i]].name;
-
+		fadeIn(objectImages[i]);
 		objectImages[i].src = "assets/images/" + objectFileName;
 		objectImages[i].classList.remove('flower-image--correct');
 		objectImages[i].classList.remove('flower-image--incorrect');
 		promptText.classList.remove('correct');
-		// promptText.classList.remove('incorrect');
 		objectNames.push(objectName);
 	}
 
@@ -89,7 +95,7 @@ function setUpTheTiles(randomNumbersArray, natureObject) {
 	promptWord.textContent = promptedObject;
 }
 
-// Set up event listener
+// Set up event listeners for the tiles
 
 tiles[0].addEventListener('click', function() {
 	selectedObject = 0;
@@ -123,19 +129,29 @@ function queryFunction(sel) {
 
 	// Check if the clicked tile is the correct one
 	if (promptedObject === objectNames[sel]) {
-	
+
 		objectImages[objectIndex].classList.add('flower-image--correct');
 		promptText.textContent = "Correct!";
 		promptText.classList.add('correct');
 		promptWord.textContent = '';
-		// Start new round after 2 seconds
-		setTimeout(function() {nextRound();}, 1000);
+
+		// Start new round after 1 second
+		if (numberOfRounds > 1) {
+			setTimeout(function() {nextRound();}, 1000);
+		} else {
+			setTimeout(function() {stopGame();}, 1000);
+		}
+
 	} else {
 		objectImages[objectIndex].classList.add('flower-image--incorrect');
+		incorrectGuesses += 1;
 	}
 }
 
 function nextRound() {
+
+	numberOfRounds -= 1;
+
 	// Play the next round
 	if (selectedMode === 1) {
 		reset(flowers);
@@ -143,16 +159,45 @@ function nextRound() {
 		reset(trees);
 	}
 }
-	
-// Make a correct/incorrect statement
+
+function stopGame() {
+
+	numberOfRounds = roundCount;
+	promptText.classList.remove('correct');
+	Array.from(objectImages, e => e.style.display = 'none');
+
+	if (incorrectGuesses === 1) {
+		promptText.textContent = 'Game Over. You made ' + incorrectGuesses + ' Mistake.';
+	} else {
+		promptText.textContent = 'Game Over. You made ' + incorrectGuesses + ' Mistakes.';
+	}
+}
+
+// Use a fade In Function
+
+function fadeIn(el) {
+  el.style.opacity = 0;
+
+  var last = +new Date();
+  var tick = function() {
+    el.style.opacity = +el.style.opacity + (new Date() - last) / 400;
+    last = +new Date();
+
+    if (+el.style.opacity < 1) {
+      (window.requestAnimationFrame && requestAnimationFrame(tick)) || setTimeout(tick, 16);
+    }
+  };
+
+  tick();
+}
 
 // Make a counter
 
+
 // Add another language
 
-// Decentralize code#
+// Decentralize code
 
-// different pictures
 
 // animations
 

@@ -439,7 +439,7 @@ img {
       margin-top: 15px; } }
 
 .prompt-section__prompt-item {
-  color: purple; }
+  color: #397DA9; }
 
 #container {
   max-width: 1200px;
@@ -469,11 +469,6 @@ img {
 
 .flower-image {
   display: block; }
-  .flower-image--correct {
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg);
-    -webkit-transition: all 1s ease-in-out;
-    transition: all 1s ease-in-out; }
   .flower-image--incorrect {
     visibility: hidden; }
 

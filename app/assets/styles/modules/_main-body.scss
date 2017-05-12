@@ -12,7 +12,7 @@
 	}
 
 	&__prompt-item {
-		color: purple;
+		color: $skyBlue;
 	}
 }
 
@@ -47,16 +47,15 @@
 
 .flower-image {
 	display: block;
-	
+		
 	&--correct {
-		transform: rotate(360deg);
-		transition: all 1s ease-in-out;
+		
 	}
 
 	&--incorrect {
 		visibility: hidden;
 	}
-	
+
 }
 
 .correct {
