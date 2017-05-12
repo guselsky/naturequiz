@@ -1,12 +1,12 @@
 var objectImages = document.querySelectorAll('.flower-image');
 var tiles = document.querySelectorAll('.flower-tile');
-var promptText = document.querySelector('#prompt-word');
+var promptText = document.querySelector('#prompt-text');
+var promptWord = document.querySelector('#prompt-word');
 var flowerButton = document.querySelector('#flowers-button');
 var treeButton = document.querySelector('#trees-button');
 // Create an array to store selected Flowers's names
 var objectNames = [];
 var promptedObject = '';
-var objectImageTag = '';
 var selectedObject = '';
 var selectedMode = "";
 
@@ -73,19 +73,23 @@ function setUpTheTiles(randomNumbersArray, natureObject) {
 		var objectName = natureObject[randomNumbersArray[i]].name;
 
 		objectImages[i].src = "assets/images/" + objectFileName;
+		objectImages[i].classList.remove('flower-image--correct');
+		objectImages[i].classList.remove('flower-image--incorrect');
+		promptText.classList.remove('correct');
+		// promptText.classList.remove('incorrect');
 		objectNames.push(objectName);
 	}
 
 	// Set a random prompted flower
 	var randomNumber = Math.floor(Math.random() * 6);
 	promptedObject = objectNames[randomNumber];
-	objectImageTag = objectImages[randomNumber];
 
 	// Change the prompt
-	promptText.textContent = promptedObject;
+	promptText.textContent = "Which one is the ";
+	promptWord.textContent = promptedObject;
 }
 
-
+// Set up event listener
 
 tiles[0].addEventListener('click', function() {
 	selectedObject = 0;
@@ -114,20 +118,42 @@ tiles[5].addEventListener('click', function() {
 
 
 function queryFunction(sel) {
+	// Find out the position of the selected item
+	var objectIndex = objectNames.indexOf(objectNames[sel]);
+
+	// Check if the clicked tile is the correct one
 	if (promptedObject === objectNames[sel]) {
-		alert('correct');
-		if (selectedMode === 1) {
-			reset(flowers);
-		} else if (selectedMode === 2) {
-			reset(trees);
-		}
-	} 
+	
+		objectImages[objectIndex].classList.add('flower-image--correct');
+		promptText.textContent = "Correct!";
+		promptText.classList.add('correct');
+		promptWord.textContent = '';
+		// Start new round after 2 seconds
+		setTimeout(function() {nextRound();}, 1000);
+	} else {
+		objectImages[objectIndex].classList.add('flower-image--incorrect');
+	}
+}
+
+function nextRound() {
+	// Play the next round
+	if (selectedMode === 1) {
+		reset(flowers);
+	} else if (selectedMode === 2) {
+		reset(trees);
+	}
 }
 	
-// Make a correct statement
+// Make a correct/incorrect statement
 
 // Make a counter
 
 // Add another language
 
-// Decentralize code
+// Decentralize code#
+
+// different pictures
+
+// animations
+
+// Create a progress bar

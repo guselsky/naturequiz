@@ -469,6 +469,19 @@ img {
 
 .flower-image {
   display: block; }
+  .flower-image--correct {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+    -webkit-transition: all 1s ease-in-out;
+    transition: all 1s ease-in-out; }
+  .flower-image--incorrect {
+    visibility: hidden; }
+
+.correct {
+  color: green; }
+
+.incorrect {
+  color: red; }
 
 .btn {
   font-size: 14px;
