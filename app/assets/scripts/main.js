@@ -22,7 +22,9 @@ function init() {
 
 // if Flowers is clicked make the quiz about flowers
 	function selectFlowerObject() {
+
 		flowerButton.addEventListener('click', function() {
+    incorrectGuesses = 0;
 		selectedMode = 1;
 		reset(flowers);
 	});
@@ -30,7 +32,9 @@ function init() {
 
 // if Trees is clicked, make the quiz about Trees
 function selectTreeObject() {
-	treeButton.addEventListener('click', function() {
+
+	  treeButton.addEventListener('click', function() {
+    incorrectGuesses = 0;
 		selectedMode = 2;
 
 		reset(trees);
@@ -46,7 +50,7 @@ function reset(natureObject) {
 
 // Make an array of numbers the size of the object
 function randomNumbers(objectLength) {
-		
+
 	randomNumbersArray = [];
 
 	for (var i = 0; i < objectLength; i++) {
@@ -99,7 +103,7 @@ function setUpTheTiles(randomNumbersArray, natureObject) {
 
 tiles[0].addEventListener('click', function() {
 	selectedObject = 0;
-	queryFunction(selectedObject);		
+	queryFunction(selectedObject);
 });
 tiles[1].addEventListener('click', function() {
 	selectedObject = 1;
