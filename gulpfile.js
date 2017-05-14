@@ -4,7 +4,8 @@ browserSync = require('browser-sync').create(),
 reload = browserSync.reload,
 autoprefixer = require('gulp-autoprefixer'),
 sass = require('gulp-sass'),
-useref = require('gulp-useref'),
+usemin = require('gulp-usemin'),
+rev = require('gulp-rev'),
 uglify = require('gulp-uglify'),
 gulpIf = require('gulp-if'),
 cssnano = require('gulp-cssnano'),
@@ -58,37 +59,39 @@ gulp.task('browserSync', function() {
   })
 });
 
-// Gulp Build Task
-gulp.task('build', function (callback) {
-  runSequence('clean:dist', 
-    ['sass', 'useref', 'images', 'fonts'],
-    callback
-  )
+// Gulp Build Task 
+
+gulp.task('previewDist', function() {
+  browserSync.init({
+    notify: false,
+    server: {
+      baseDir: "dist"
+    }
+  });
 });
 
-gulp.task('useref', function(){
-  return gulp.src('app/*.html')
-    .pipe(useref())
-    // Minifies only if it's a JavaScript file
-    .pipe(gulpIf('*.js', uglify()))
-    .pipe(gulpIf('css/*.css', cssnano()))
-    .pipe(gulp.dest('dist'))
+gulp.task('deleteDistFolder', function() {
+  return del('./dist');
 });
 
-gulp.task('images', function(){
-  return gulp.src('app/images/**/*.+(png|jpg|jpeg|gif|svg)')
-  // Caching images that ran through imagemin
-  .pipe(cache(imagemin({
-      interlaced: true
-    })))
-  .pipe(gulp.dest('dist/images'))
+gulp.task('optimizeImages', ['deleteDistFolder'], function() {
+  return gulp.src('./app/assets/images/**/*')
+  .pipe(imagemin({
+    progressive: true,
+    interlaced: true,
+    multipass: true
+  }))
+  .pipe(gulp.dest('./dist/assets/images'))
 });
 
-gulp.task('fonts', function() {
-  return gulp.src('app/fonts/**/*')
-  .pipe(gulp.dest('dist/fonts'))
+gulp.task('usemin', ['deleteDistFolder', 'sass'], function() {
+  return gulp.src('./app/index.html')
+    .pipe(usemin({
+      // Revision and Compress CSS and JS
+      css: [function() {return rev()}, function() {return cssnano()}],
+      // js: [function() {return rev()}, function() {return uglify()}]
+    }))
+    .pipe(gulp.dest('./dist'));
 });
 
-gulp.task('clean:dist', function() {
-  return del.sync('dist');
-});
+gulp.task('build', ['deleteDistFolder', 'optimizeImages', 'usemin']);
