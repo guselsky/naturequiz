@@ -1,16 +1,23 @@
+// Select all image elements
 var objectImages = document.querySelectorAll('.flower-image');
+// Select Tile Divs that contain the image elements
 var tiles = document.querySelectorAll('.flower-tile');
+// Select the text in the promt area
 var promptText = document.querySelector('#prompt-text');
+// Select the variable word in the promt area
 var promptWord = document.querySelector('#prompt-word');
+// Select the buttons
 var flowerButton = document.querySelector('#flowers-button');
 var treeButton = document.querySelector('#trees-button');
 // Create an array to store selected Flowers's names
-var objectNames = [];
+// var objectNames = [];
 var promptedObject = '';
 var selectedObject = '';
 var selectedMode = "";
-var roundCount = 10;
+// Set how many rounds should be played
+var roundCount = 2;
 var numberOfRounds = roundCount;
+// Set a counter for incorrect Guesses
 var incorrectGuesses = 0;
 
 init();
@@ -40,6 +47,7 @@ function selectTreeObject() {
 	});
 }
 
+// Set up a new round
 function reset(natureObject) {
 
 	randomNumbers(natureObject.length);
@@ -70,26 +78,33 @@ function shuffle(array) {
 
 // Set up the Quiz Tiles
 function setUpTheTiles(randomNumbersArray, natureObject) {
+	
 	// display images again after a game is over
 	Array.from(objectImages, e => e.style.display = 'block');
 
-	// Create an array to store selected Flowers's names
+	// Create an array to store selected Flowers's names as strings
 	objectNames = [];
 
 	// Set up the tiles
 	for (var i = 0; i < objectImages.length; i++) {
 
+		// Get the filename-partial of preselected index in things array
 		var objectFileName = natureObject[randomNumbersArray[i]].fileName;
+		// Get the name of preselected index in things array
 		var objectName = natureObject[randomNumbersArray[i]].name;
 		fadeIn(objectImages[i]);
+		// Set the src content of image html elements (brings in images)
 		objectImages[i].src = "assets/images/" + objectFileName;
+
 		objectImages[i].classList.remove('flower-image--correct');
 		objectImages[i].classList.remove('flower-image--incorrect');
 		promptText.classList.remove('correct');
+		
+		// Put the selected names into the objectNames - Array
 		objectNames.push(objectName);
 	}
 
-	// Set a random prompted flower
+	// Set a random thing that will be prompted for
 	var randomNumber = Math.floor(Math.random() * 6);
 	promptedObject = objectNames[randomNumber];
 
@@ -125,8 +140,9 @@ tiles[5].addEventListener('click', function() {
 	queryFunction(selectedObject);
 });
 
-
+// Check if the clicked item is correct
 function queryFunction(sel) {
+
 	// Find out the position of the selected item
 	var objectIndex = objectNames.indexOf(objectNames[sel]);
 
@@ -196,12 +212,10 @@ function fadeIn(el) {
 
 // Make a counter
 
-
 // Add another language
 
-// Decentralize code
+// Bundle JS code
 
-
-// animations
+// Use Ajax
 
 // Create a progress bar

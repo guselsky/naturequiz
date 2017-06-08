@@ -59,6 +59,7 @@ gulp.task('browserSync', function() {
   })
 });
 
+
 // Gulp Build Task 
 
 gulp.task('previewDist', function() {
@@ -95,3 +96,6 @@ gulp.task('usemin', ['deleteDistFolder', 'sass'], function() {
 });
 
 gulp.task('build', ['deleteDistFolder', 'optimizeImages', 'usemin']);
+
+// Gulp Sprites Task
+require('./gulp/tasks/sprites');
